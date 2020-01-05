@@ -1,0 +1,68 @@
+
+import mysql.connector
+def get():
+    conn=mysql.connector.connect(host="localhost",database="python",user="root",password=" ")
+    return conn
+def insert(sname,semail):
+    conn=get()
+    cur=conn.cursor()
+    query="insert into student(sname.semail) values(%s,%s)";
+    args=(sname,semail)
+    cur.execute(query,args)
+    conn.commit()
+    conn.close()
+def update(sname,semail,sid):
+    conn=get()
+    cur=conn.cursor()
+    query="update student set sname=%s,semail=%s,where sid=%s";
+    args=(sname,semail,sid)
+    cur.execute(query,args)
+    conn.commit()
+    conn.close()
+    print("update student data")
+def delete(sid):
+    conn=get()
+    cur=conn.cursor()
+    query="delete from student set sname=%s,where sid=%s";
+    args=(sid,)
+    cur.execute(query,args)
+    conn.commit()
+    conn.close()
+    print("delete student data")
+def select():
+    conn=get()
+    cur=conn.cursor()
+    query="select * from student";
+    cur.execute(query)
+    conn.commit()
+    conn.close()
+    print("delete student data")
+    return rows
+import databaseOperation
+print("enter student name:",end=" ")
+
+
+from DatabaseOperation import *
+sname=input("enter the student name")
+semail=input("enter the student email")
+insert(sname,semail)
+
+from DatabaseOperation import *
+sname=input("enter studenr name")
+semail=input("enter student email:")
+sid=int(input("enter the rollnumber:"))
+update(sname,semail,sid)
+
+from DatabaseOperation import *
+sid=int(input("enter the student rollno"))
+delete(sid)
+
+from DatabaseOperation import *
+students=select()
+for student in students:
+    print("rollno:" student[0])
+    print("name:" student[1])
+    print("email:" student[2])
+    print()
+
+    
